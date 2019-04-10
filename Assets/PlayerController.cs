@@ -72,8 +72,13 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetObject.tag == "AI")
                 {
-                    Move_player.Arrive(targetObject.transform.position);
-                    if (Move_player.InMeleeRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true)
+                    // Move_player.Arrive(targetObject.transform.position);
+                    if (Move_player.InRangedRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true)
+                    {
+                        Move_player.animator.SetBool("CanAttack", true);
+                        Combat_player.AttackAttempt();
+                    }
+                    else if (Move_player.InMeleeRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true)
                     {
                         Move_player.animator.SetBool("CanAttack", true);
                         Combat_player.AttackAttempt();
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     void LeftClick()
     {
-        // rest params
+        // Reset the click parameters
         ResetTarget();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -152,6 +157,8 @@ public class PlayerController : MonoBehaviour
         singleSelect = false;
         Move_player.moveToCursor = false;
         Move_player.hasTarget = false;
+        Move_player.animator.SetBool("CanAttack", false);
+        Combat_player.ResetEnemy();
         targetPosition = Vector3.zero;
         targetObject = null;
     }

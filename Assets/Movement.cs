@@ -9,8 +9,8 @@ public class Movement : MonoBehaviour
     float t2t = 1.4f;
     float nearRadius = 10f;
     float slowdownRadius = 15f;
-    float meleeRange = 7f;
-    float rangedRange = 20.0f;
+    float meleeRadius = 7f;
+    float rangedRadius = 30.0f;
     public bool inMeleeRange = false;
     float distanceFromTarget;
     Vector3 moveDirection;
@@ -26,7 +26,20 @@ public class Movement : MonoBehaviour
     public bool InMeleeRange(Vector3 target)
     {
         distanceFromTarget = (target - playerGO.transform.position).magnitude;
-        if (distanceFromTarget < nearRadius)
+        if (distanceFromTarget < nearRadius) // meleeRadius == nearRadius (can be changed later on)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool InRangedRange(Vector3 target)
+    {
+        distanceFromTarget = (target - playerGO.transform.position).magnitude;
+        if (distanceFromTarget < rangedRadius)
         {
             return true;
         }
