@@ -111,11 +111,11 @@ public class Movement : MonoBehaviour
     void Pursue(GameObject target, GameObject player)
     {
         distanceFromTarget = (target.transform.position - player.transform.position).magnitude;
-        if (distanceFromTarget < meleeRange)
+        if (distanceFromTarget < meleeRadius)
         {
             //attack with melee
         }
-        else if (distanceFromTarget < rangedRange)//&& ranged weapon chosen
+        else if (distanceFromTarget < rangedRadius)//&& ranged weapon chosen
         {
             //attack with ranged weapon
         }
