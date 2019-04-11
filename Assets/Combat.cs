@@ -6,7 +6,9 @@ public class Combat : MonoBehaviour
 {
     // Character's Vitals
     public float health = 400f;
+    public float max_health = 400f;
     public float shield = 0f;
+    public float max_shield = 0f;
     // Character's Combat probabilities
     public float dodgeProbability = 0f;
     public float blockProbability = 0f;
@@ -21,7 +23,7 @@ public class Combat : MonoBehaviour
     private float lastAttack = 0f;
     private Combat enemy;
     // Character's current weapon choice
-    string weaponToggle = "Melee";
+    public string weaponToggle = "Melee";
 
     // Start is called before the first frame update
     void Start()
