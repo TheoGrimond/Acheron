@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Movement Move_player;
-    Combat Combat_player;
+    public Combat Combat_player;
+    public SpellBook SpellBook_script;
     public Vector3 targetPosition;
     public GameObject targetObject;
     bool hasTarget = false;
@@ -15,13 +16,14 @@ public class PlayerController : MonoBehaviour
     float max_health;
     float current_health;
     public GameObject cursor;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         //Move_player = new Movement();
         //Move_player.animator = this.gameObject.GetComponentInChildren<Animator>();
-        Combat_player = new Combat();
+        //Combat_player = new Combat();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if (targetPosition != Vector3.zero)
         {
             // Lava is below 5.0f
-            if (transform.position.y < 0.0f)
+            if (transform.position.y < 5.0f)
             {
                 Dead();
             }
@@ -47,6 +49,32 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             LeftClick();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("InstaCrit called !");
+            if (SpellBook_script.InstaCrit.isActive == false && Time.time > SpellBook_script.InstaCrit.lastUse)
+            {
+                SpellBook_script.InstaCrit.isActive = true;
+                Debug.Log("InstaCrit activated");
+            }
+            else
+            {
+                Debug.Log("InstaCrit called but cooldown refused activation");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("DoubleStrike called !");
+            if (SpellBook_script.DoubleStrike.isActive == false && Time.time > SpellBook_script.DoubleStrike.lastUse)
+            {
+                SpellBook_script.DoubleStrike.isActive = true;
+                Debug.Log("DoubleStrike activated");
+            }
+            else
+            {
+                Debug.Log("DoubleStrike called but cooldown refused activation");
+            }
         }
     }
 
@@ -72,20 +100,24 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetObject.tag == "AI")
                 {
-                    // Move_player.Arrive(targetObject.transform.position);
-                    if (Move_player.InRangedRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true)
+                    Move_player.Arrive(targetObject.transform.position);
+                    if (Move_player.InRangedRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true && Combat_player.GetCurrentWeapon() == "Ranged")
                     {
                         Move_player.animator.SetBool("CanAttack", true);
                         Combat_player.AttackAttempt();
                     }
-                    else if (Move_player.InMeleeRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true)
+                    else if (Move_player.InMeleeRange(targetObject.transform.position) == true && Combat_player.CanIAttack() == true && Combat_player.GetCurrentWeapon() == "Melee")
                     {
                         Move_player.animator.SetBool("CanAttack", true);
                         Combat_player.AttackAttempt();
+                    }
+                    else if (hasTarget == true && Combat_player.GetEnemy() != null)
+                    {
+                        Move_player.Arrive(targetObject.transform.position);
                     }
                     else
                     {
-                        Move_player.Arrive(targetObject.transform.position);
+                        ResetTarget();
                     }
                 }
                 /*if (targetObject.tag == "Loot")
@@ -122,7 +154,8 @@ public class PlayerController : MonoBehaviour
                 Move_player.moveToCursor = true;
                 if (singleSelect == false)
                 {
-                    Instantiate(cursor, new Vector3(targetPosition.x, targetPosition.y + 1.0f, targetPosition.z), cursor.transform.rotation);
+                    cursor.transform.position = new Vector3(targetPosition.x, targetPosition.y + 1.0f, targetPosition.z);
+                    //Instantiate(cursor, new Vector3(targetPosition.x, targetPosition.y + 1.0f, targetPosition.z), cursor.transform.rotation);
                     singleSelect = true;
                 }
 
@@ -150,11 +183,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Reset target parameters
-    void ResetTarget()
+    public void ResetTarget()
     {
         hasTarget = false;
         moveToCursor = false;
         singleSelect = false;
+        cursor.transform.position = new Vector3(-200f, 0f, -200f);
         Move_player.moveToCursor = false;
         Move_player.hasTarget = false;
         Move_player.animator.SetBool("CanAttack", false);

@@ -7,9 +7,9 @@ public class Movement : MonoBehaviour
     //parameters
     float speed = 25.0f;
     float t2t = 1.4f;
-    float nearRadius = 10f;
-    float slowdownRadius = 15f;
-    float meleeRadius = 7f;
+    float nearRadius = 12f;
+    float slowdownRadius = 20f;
+    float meleeRadius = 12f;
     float rangedRadius = 30.0f;
     public bool inMeleeRange = false;
     float distanceFromTarget;
@@ -21,11 +21,13 @@ public class Movement : MonoBehaviour
 
     GameObject playerGO;
     Rigidbody playerRB;
+    public GameObject cursor;
 
     // Public function that checks if player is in Melee Range of target
     public bool InMeleeRange(Vector3 target)
     {
         distanceFromTarget = (target - playerGO.transform.position).magnitude;
+        //Debug.Log(distanceFromTarget);
         if (distanceFromTarget < nearRadius) // meleeRadius == nearRadius (can be changed later on)
         {
             return true;
@@ -77,12 +79,11 @@ public class Movement : MonoBehaviour
             playerRB.velocity = new Vector3(0.0f, 0.0f, 0.0f);
             
             animator.SetFloat("Speed", new Vector3(0.0f, 0.0f, 0.0f).magnitude);
-            Debug.Log("PlayerRBRot:" + playerRB.rotation);
+            //Debug.Log("PlayerRBRot:" + playerRB.rotation);
             inMeleeRange = true;
             if (moveToCursor)
             {
-                // Delete Cursor
-                Destroy(GameObject.Find("Cursor(Clone)"));
+                cursor.transform.position = new Vector3(-200f, 0f, -200f);
             }
             //hasTarget = false;
         }
@@ -93,18 +94,34 @@ public class Movement : MonoBehaviour
             playerGO.transform.rotation = Quaternion.RotateTowards(playerGO.transform.rotation, lookWhereYoureGoing, 7.5f);
             //player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
             float velocityMagnitude = Mathf.Min(speed, (Vector3.Distance(new Vector3(target.x,0f,target.z), new Vector3(playerGO.transform.position.x, 0f, playerGO.transform.position.z))) / t2t);
-            playerRB.velocity = (new Vector3(moveDirection.x, 0f, moveDirection.z).normalized * velocityMagnitude);
+            float yaxis = moveDirection.y;
+            if (yaxis < 0f)
+            {
+                playerRB.velocity = (new Vector3(moveDirection.x, yaxis, moveDirection.z).normalized * velocityMagnitude);
+            }
+            else
+            {
+                playerRB.velocity = (new Vector3(moveDirection.x, 0f, moveDirection.z).normalized * velocityMagnitude);
+            }
             animator.SetFloat("Speed", playerRB.velocity.magnitude);
-            Debug.Log("PlayerRBRot:" + playerRB.rotation);
+            //Debug.Log("PlayerRBRot:" + playerRB.rotation);
         }
         else
         {
             lookWhereYoureGoing = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z), Vector3.up);
             playerGO.transform.rotation = Quaternion.RotateTowards(playerGO.transform.rotation, lookWhereYoureGoing, 7.5f);
             //player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(moveDirection), 0.15F);
-            playerRB.velocity = (new Vector3(moveDirection.x ,0f, moveDirection.z).normalized * speed);
+            float yaxis = moveDirection.y;
+            if (yaxis < 0f)
+            {
+                playerRB.velocity = (new Vector3(moveDirection.x, yaxis, moveDirection.z).normalized * speed);
+            }
+            else
+            {
+                playerRB.velocity = (new Vector3(moveDirection.x, 0f, moveDirection.z).normalized * speed);
+            }
             animator.SetFloat("Speed", playerRB.velocity.magnitude);
-            Debug.Log("PlayerRBRot:" + playerRB.rotation);
+            //Debug.Log("PlayerRBRot:" + playerRB.rotation);
         }
     }
 
@@ -140,7 +157,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         playerGO = this.gameObject;
-        Debug.Log("PlayerGameObject: " + playerGO);
+        //Debug.Log("PlayerGameObject: " + playerGO);
         playerRB = playerGO.GetComponentInChildren<Rigidbody>();
     }
 

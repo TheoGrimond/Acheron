@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
+    // Character parameters
+    public PlayerController PlayerController_script;
+    public SpellBook SpellBook_script;
     // Character's Vitals
     public float health = 400f;
     public float shield = 0f;
@@ -14,12 +17,11 @@ public class Combat : MonoBehaviour
     // Character's Max/Min damage range
     public float meleeDmgMin, meleeDmgMax = 0f;
     public float rangedDmgMin, rangedDmgMax = 0f;
-    // Character's Private parameters
-    // Used during single attack attempts
+    // Character's Single Attack parameters
     private float damage = 0f;
     private float attackCooldown = 0.5f;
     private float lastAttack = 0f;
-    private Combat enemy;
+    public Combat enemy;
     // Character's current weapon choice
     string weaponToggle = "Melee";
 
@@ -32,10 +34,18 @@ public class Combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health == 0f)
+        if (health <= 0f)
         {
+            //Debug.Log(enemy);
+            enemy.ResetEnemy();
             this.gameObject.SetActive(false);
         }
+    }
+
+    // Get the equip currently equip
+    public string GetCurrentWeapon()
+    {
+        return weaponToggle;
     }
 
     // Toggle between the character's 
@@ -52,12 +62,18 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public Combat GetEnemy()
+    {
+        return enemy;
+    }
+
     // Called when left clicking an enemy
     // Retrieves the Combat component of the enemy
     // To access combat parameters during combat
     public void SetEnemy(GameObject target)
     {
         enemy = target.GetComponent<Combat>();
+        //Debug.Log(enemy);
     }
 
     // Called when clicking away from the enemy 
@@ -65,6 +81,7 @@ public class Combat : MonoBehaviour
     public void ResetEnemy()
     {
         enemy = null;
+        
     }
 
     // Check if the character's attack cooldown is done
@@ -111,6 +128,7 @@ public class Combat : MonoBehaviour
     {
         if (Random.Range(0f, dodgeProbability) == 0f)
         {
+            Debug.Log("Hit dodged !!");
             return true;
         }
         else
@@ -123,6 +141,7 @@ public class Combat : MonoBehaviour
     {
         if (Random.Range(0f, blockProbability) == 0f)
         {
+            Debug.Log("Hit blocked !!");
             return true;
         }
         else
@@ -135,6 +154,7 @@ public class Combat : MonoBehaviour
     {
         if (Random.Range(0f, critProbability) == 0f)
         {
+            Debug.Log("Critical hit !!");
             return true;
         }
         else
@@ -157,7 +177,32 @@ public class Combat : MonoBehaviour
                 // Check dmg amount and apply to enemy health
 
                 // Check if this character deals critical damage
-                if (this.CriticalHit())                                                    // <---------------------------   Add Insta Crit Spell check
+                if (SpellBook_script.InstaCrit.isActive == true && Time.time > SpellBook_script.InstaCrit.lastUse)
+                {
+                    if (weaponToggle == "Melee")
+                    {
+                        damage = meleeDmgMax + 5f;
+                    }
+                    else
+                    {
+                        damage = rangedDmgMax + 5f;
+                    }
+                    // Apply the damage to enemy
+                    enemy.TakesHit(damage);
+                    if (SpellBook_script.DoubleStrike.isActive == true && Time.time > SpellBook_script.DoubleStrike.lastUse)
+                    {
+                        enemy.TakesHit(damage);
+                        Debug.Log("Double strike hit!");
+                        SpellBook_script.DoubleStrike.isActive = false;
+                        SpellBook_script.DoubleStrike.lastUse = Time.time + SpellBook_script.InstaCrit.GetCooldown();
+                    }
+                    lastAttack = Time.time + attackCooldown;
+                    Debug.Log("InstaCrit hit! Damage dealt : "+ damage);
+                    // Apply cooldown to Spell
+                    SpellBook_script.InstaCrit.isActive = false;
+                    SpellBook_script.InstaCrit.lastUse = Time.time + SpellBook_script.InstaCrit.GetCooldown();
+                }
+                else if (CriticalHit())                                                    // <---------------------------   Add Insta Crit Spell check
                 {
                     // Check which weapon is equipped 
                     // & applies its Maximum Damage
@@ -171,12 +216,26 @@ public class Combat : MonoBehaviour
                     }
                     // Apply the damage to enemy
                     enemy.TakesHit(damage);
+                    if (SpellBook_script.DoubleStrike.isActive == true && Time.time > SpellBook_script.DoubleStrike.lastUse)
+                    {
+                        enemy.TakesHit(damage);
+                        Debug.Log("Double strike hit!");
+                        SpellBook_script.DoubleStrike.isActive = false;
+                        SpellBook_script.DoubleStrike.lastUse = Time.time + SpellBook_script.InstaCrit.GetCooldown();
+                    }
                     lastAttack = Time.time + attackCooldown;
                 }
                 else
                 {
                     // apply regular damage
                     damage = RollDamage();
+                    if (SpellBook_script.DoubleStrike.isActive == true && Time.time > SpellBook_script.DoubleStrike.lastUse)
+                    {
+                        enemy.TakesHit(damage);
+                        Debug.Log("Double strike hit!");
+                        SpellBook_script.DoubleStrike.isActive = false;
+                        SpellBook_script.DoubleStrike.lastUse = Time.time + SpellBook_script.InstaCrit.GetCooldown();
+                    }
                     enemy.TakesHit(damage);
                     lastAttack = Time.time + attackCooldown;
                 }
@@ -186,6 +245,13 @@ public class Combat : MonoBehaviour
                 // Hit was blocked
                 // Apply the damage to the opponent's shield
                 damage = RollDamage();
+                if (SpellBook_script.DoubleStrike.isActive == true && Time.time > SpellBook_script.DoubleStrike.lastUse)
+                {
+                    enemy.TakesHit(damage);
+                    Debug.Log("Double strike hit!");
+                    SpellBook_script.DoubleStrike.isActive = false;
+                    SpellBook_script.DoubleStrike.lastUse = Time.time + SpellBook_script.InstaCrit.GetCooldown();
+                }
                 enemy.TakesBlockedHit(damage);
                 lastAttack = Time.time + attackCooldown;
             }

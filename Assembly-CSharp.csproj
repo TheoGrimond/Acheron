@@ -66,6 +66,8 @@
     <Compile Include="Assets\Inventory.cs" />
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\PlayerController.cs" />
+    <Compile Include="Assets\Spell.cs" />
+    <Compile Include="Assets\SpellBook.cs" />
     <Compile Include="Assets\Weapon.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Repositories/Acheron/Acheron/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
