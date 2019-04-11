@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740e3a72aec82c147ba72d7ab4df09ee, type: 3}
+  m_Name: Script
+  m_EditorClassIdentifier: 
+  entries:
+  - id: FirstInteraction
+    maxLineId: 19
+    speakers:
+    - NPC
+    - Player
+  lines:
+  - id: 0
+    dialogueEntry: FirstInteraction
+    dialogue: 
+    output: 01000000
+    position: {x: 10, y: 10}
+    userData: 
+    speaker: NPC
+  - id: 1
+    dialogueEntry: FirstInteraction
+    dialogue: Oh hi there! You look even worse than me!
+    output: 0200000004000000
+    position: {x: 146, y: 11}
+    userData: 
+    speaker: NPC
+  - id: 2
+    dialogueEntry: FirstInteraction
+    dialogue: I take that as a compliment.
+    output: 06000000
+    position: {x: 303, y: -3}
+    userData: 
+    speaker: Player
+  - id: 4
+    dialogueEntry: FirstInteraction
+    dialogue: Who are you?
+    output: 05000000
+    position: {x: 299, y: 96}
+    userData: 
+    speaker: Player
+  - id: 5
+    dialogueEntry: FirstInteraction
+    dialogue: Name's Derek. Trying to survive just like you do.
+    output: 07000000
+    position: {x: 461, y: 96}
+    userData: 
+    speaker: NPC
+  - id: 6
+    dialogueEntry: FirstInteraction
+    dialogue: You're a peculiar one. Anyway, my name's Derek. Surviving just like
+      any other.
+    output: 07000000
+    position: {x: 464, y: -2}
+    userData: 
+    speaker: NPC
+  - id: 7
+    dialogueEntry: FirstInteraction
+    dialogue: Is getting stuck here surounded by lava a part of your survival?
+    output: 08000000
+    position: {x: 607, y: 56}
+    userData: 
+    speaker: Player
+  - id: 8
+    dialogueEntry: FirstInteraction
+    dialogue: 'Well, you''re in the same spot, aren''t you?
+
+      Tell you what, there must be bunch of those sour Magnus robots around. If you
+      manage to salvage some parts from them for me, I can a make a quick bridge from
+      it to get both of us pass from here.'
+    output: 090000000b0000000c000000
+    position: {x: 26, y: 218}
+    userData: 
+    speaker: NPC
+  - id: 9
+    dialogueEntry: FirstInteraction
+    dialogue: Magnus?
+    output: 0d000000
+    position: {x: 199, y: 190}
+    userData: 
+    speaker: Player
+  - id: 11
+    dialogueEntry: FirstInteraction
+    dialogue: You can make a bridge that fast?
+    output: 0e000000
+    position: {x: 241, y: 267}
+    userData: 
+    speaker: Player
+  - id: 12
+    dialogueEntry: FirstInteraction
+    dialogue: I already have some metal parts with me.
+    output: 0f000000
+    position: {x: 269, y: 405}
+    userData: 
+    speaker: Player
+  - id: 13
+    dialogueEntry: FirstInteraction
+    dialogue: They're the one controlling those robots. At first I thought you might
+      be one of them.
+    output: 0c00000010000000
+    position: {x: 422, y: 184}
+    userData: 
+    speaker: NPC
+  - id: 14
+    dialogueEntry: FirstInteraction
+    dialogue: That's what I do for surviving here. Not making bridges I mean, repairing
+      and creating stuff from junk. Maybe I can make something for you after we get
+      pass from this river.
+    output: 0c00000010000000
+    position: {x: 418, y: 277}
+    userData: 
+    speaker: NPC
+  - id: 15
+    dialogueEntry: FirstInteraction
+    dialogue: What are you waiting for? give them to me.
+    output: 
+    position: {x: 471, y: 396}
+    userData: 
+    speaker: NPC
+  - id: 16
+    dialogueEntry: FirstInteraction
+    dialogue: I'll look for the parts that you want.
+    output: 11000000
+    position: {x: 632, y: 183}
+    userData: 
+    speaker: Player
+  - id: 17
+    dialogueEntry: FirstInteraction
+    dialogue: Stay alive!
+    output: 12000000
+    position: {x: 828, y: 181}
+    userData: 
+    speaker: NPC
+  - id: 18
+    dialogueEntry: FirstInteraction
+    dialogue: I found the parts.
+    output: 0f000000
+    position: {x: 730, y: 280}
+    userData: 
+    speaker: Player

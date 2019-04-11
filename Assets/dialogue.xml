@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DialogueFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <name>Script</name>
+  <hideFlags>None</hideFlags>
+  <entries>
+    <DialogueEntry>
+      <id>FirstInteraction</id>
+      <maxLineId>19</maxLineId>
+      <speakers>
+        <string>NPC</string>
+        <string>Player</string>
+      </speakers>
+    </DialogueEntry>
+  </entries>
+  <lines>
+    <DialogueLine>
+      <id>0</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <output>
+        <int>1</int>
+      </output>
+      <position>
+        <x>10</x>
+        <y>10</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>1</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Oh hi there! You look even worse than me!</dialogue>
+      <output>
+        <int>2</int>
+        <int>4</int>
+      </output>
+      <position>
+        <x>146</x>
+        <y>11</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>2</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>I take that as a compliment.</dialogue>
+      <output>
+        <int>6</int>
+      </output>
+      <position>
+        <x>303</x>
+        <y>-3</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>4</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Who are you?</dialogue>
+      <output>
+        <int>5</int>
+      </output>
+      <position>
+        <x>299</x>
+        <y>96</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>5</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Name's Derek. Trying to survive just like you do.</dialogue>
+      <output>
+        <int>7</int>
+      </output>
+      <position>
+        <x>461</x>
+        <y>96</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>6</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>You're a peculiar one. Anyway, my name's Derek. Surviving just like any other.</dialogue>
+      <output>
+        <int>7</int>
+      </output>
+      <position>
+        <x>464</x>
+        <y>-2</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>7</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Is getting stuck here surounded by lava a part of your survival?</dialogue>
+      <output>
+        <int>8</int>
+      </output>
+      <position>
+        <x>607</x>
+        <y>56</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>8</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Well, you're in the same spot, aren't you?
+Tell you what, there must be bunch of those sour Magnus robots around. If you manage to salvage some parts from them for me, I can a make a quick bridge from it to get both of us pass from here.</dialogue>
+      <output>
+        <int>9</int>
+        <int>11</int>
+        <int>12</int>
+      </output>
+      <position>
+        <x>26</x>
+        <y>218</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>9</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Magnus?</dialogue>
+      <output>
+        <int>13</int>
+      </output>
+      <position>
+        <x>199</x>
+        <y>190</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>11</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>You can make a bridge that fast?</dialogue>
+      <output>
+        <int>14</int>
+      </output>
+      <position>
+        <x>241</x>
+        <y>267</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>12</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>I already have some metal parts with me.</dialogue>
+      <output>
+        <int>15</int>
+      </output>
+      <position>
+        <x>269</x>
+        <y>405</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>13</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>They're the one controlling those robots. At first I thought you might be one of them.</dialogue>
+      <output>
+        <int>12</int>
+        <int>16</int>
+      </output>
+      <position>
+        <x>422</x>
+        <y>184</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>14</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>That's what I do for surviving here. Not making bridges I mean, repairing and creating stuff from junk. Maybe I can make something for you after we get pass from this river.</dialogue>
+      <output>
+        <int>12</int>
+        <int>16</int>
+      </output>
+      <position>
+        <x>418</x>
+        <y>277</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>15</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>What are you waiting for? give them to me.</dialogue>
+      <output />
+      <position>
+        <x>471</x>
+        <y>396</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>16</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>I'll look for the parts that you want.</dialogue>
+      <output>
+        <int>17</int>
+      </output>
+      <position>
+        <x>632</x>
+        <y>183</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>17</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>Stay alive!</dialogue>
+      <output>
+        <int>18</int>
+      </output>
+      <position>
+        <x>828</x>
+        <y>181</y>
+      </position>
+      <userData />
+      <speaker>NPC</speaker>
+    </DialogueLine>
+    <DialogueLine>
+      <id>18</id>
+      <dialogueEntry>FirstInteraction</dialogueEntry>
+      <dialogue>I found the parts.</dialogue>
+      <output>
+        <int>15</int>
+      </output>
+      <position>
+        <x>730</x>
+        <y>280</y>
+      </position>
+      <userData />
+      <speaker>Player</speaker>
+    </DialogueLine>
+  </lines>
+</DialogueFile>
